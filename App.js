@@ -179,8 +179,9 @@ export default function App() {
           >
             <Image
               source={require('./assets/calculator-svgrepo-com.png')}
-              style={{ width: 30, height: 40 }}
+              style={{ width: 28, height: 42, resizeMode: 'stretch' }}
             />
+
           </TouchableOpacity>
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: '#2B2B2D' }}
