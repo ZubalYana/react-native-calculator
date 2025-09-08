@@ -11,6 +11,21 @@ export default function App() {
   }
   return (
     <View style={styles.container}>
+      <View style={styles.burgerContainer}>
+        <View style={styles.burgerRow}>
+          <View style={styles.burgerDot}></View>
+          <View style={styles.burgerLine}></View>
+        </View>
+        <View style={styles.burgerRow}>
+          <View style={styles.burgerDot}></View>
+          <View style={styles.burgerLine}></View>
+        </View>
+        <View style={styles.burgerRow}>
+          <View style={styles.burgerDot}></View>
+          <View style={styles.burgerLine}></View>
+        </View>
+      </View>
+
       <TextInput
         style={styles.input}
         placeholder="0"
@@ -179,7 +194,7 @@ export default function App() {
           >
             <Image
               source={require('./assets/calculator-svgrepo-com.png')}
-              style={{ width: 28, height: 42, resizeMode: 'stretch' }}
+              style={{ width: 29, height: 42, resizeMode: 'stretch' }}
             />
 
           </TouchableOpacity>
@@ -221,7 +236,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000ff',
     alignItems: 'flex-start',
     justifyContent: 'center',
-    padding: 10,
+    padding: 12,
 
   },
   input: {
@@ -251,12 +266,34 @@ const styles = StyleSheet.create({
   },
   buttonsRow: {
     flexDirection: 'row',
-    gap: 11,
-    marginTop: 11,
+    gap: 9,
+    marginTop: 9,
   },
   plusMinusBtnContainer: {
     position: 'relative',
     width: '100%',
     height: '100%'
+  },
+  burgerDot: {
+    width: 3,
+    height: 3,
+    borderRadius: 50,
+    backgroundColor: '#FF9F0A',
+  },
+  burgerLine: {
+    width: 18,
+    height: 2,
+    backgroundColor: '#FF9F0A',
+  },
+  burgerRow: {
+    flexDirection: 'row',
+    gap: 3,
+  },
+  burgerContainer: {
+    position: 'absolute',
+    top: 70,
+    left: 20,
+    flexDirection: 'column',
+    gap: 4
   }
 });
