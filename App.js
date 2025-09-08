@@ -248,6 +248,7 @@ const styles = StyleSheet.create({
     fontSize: 78,
     textAlign: 'right',
     marginBottom: 4,
+    marginTop: 235
   },
   inputPlaceholder: {
     color: '#ffffff',
