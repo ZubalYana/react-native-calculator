@@ -46,7 +46,10 @@ export default function App() {
               console.log(inputedData)
             }}
           >
-            <Text style={{ color: 'white', fontSize: 38 }}>AC</Text>
+            {inputedData.length === 0 ? <Text style={{ color: 'white', fontSize: 38 }}>AC</Text> : <Image
+              source={require('./assets/backspace.png')}
+              style={{ width: 43, height: 35, resizeMode: 'stretch' }}
+            />}
           </TouchableOpacity>
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: '#5C5C5E' }}
@@ -54,7 +57,7 @@ export default function App() {
           >
             <View style={{ ...styles.plusMinusBtnContainer }}>
               <Text style={{ color: 'white', fontSize: 24, position: 'absolute', left: '32%', top: '22%' }}>+</Text>
-              <Text style={{ color: 'white', fontSize: 38, position: 'absolute', left: '45%', top: '21%', transform: [{ rotate: '17deg' }] }}>/</Text>
+              <Text style={{ color: 'white', fontSize: 38, position: 'absolute', left: '45%', top: '21%', transform: [{ rotate: '20deg' }] }}>/</Text>
               <Text style={{ color: 'white', fontSize: 32, position: 'absolute', right: '32%', top: '35%' }}>-</Text>
             </View>
           </TouchableOpacity>
