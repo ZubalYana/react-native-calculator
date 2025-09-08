@@ -38,6 +38,10 @@ export default function App() {
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: '#5C5C5E' }}
             onPress={() => {
+              setInputedData(inputedData.slice(0, -1))
+              console.log(inputedData)
+            }}
+            onLongPress={() => {
               setInputedData('')
               console.log(inputedData)
             }}
