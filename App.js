@@ -7,13 +7,16 @@ export default function App() {
 
   const calculate = () => {
     try {
-      const expression = inputedData
+      let expression = inputedData
         .replace(/×/g, '*')
         .replace(/÷/g, '/')
         .replace(/,/g, '.');
 
-      let result = eval(expression);
+      if (expression.includes('%')) {
+        expression = handlePercentage(expression);
+      }
 
+      let result = eval(expression);
       result = parseFloat(result.toFixed(10));
 
       setInputedData(result.toString());
@@ -22,6 +25,12 @@ export default function App() {
       console.log("Invalid expression", e);
     }
   };
+  const handlePercentage = (expr) => {
+    return expr.replace(/(\d+(\.\d+)?)%/g, (match, number) => {
+      return `(${number}/100)`;
+    });
+  };
+
 
   return (
     <View style={styles.container}>
