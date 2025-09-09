@@ -6,8 +6,17 @@ export default function App() {
   const [inputedData, setInputedData] = useState('');
 
   const calculate = () => {
-    setInputedData(eval(inputedData).toString())
-    console.log(inputedData)
+    try {
+      const expression = inputedData
+        .replace(/×/g, '*')
+        .replace(/÷/g, '/')
+        .replace(/,/g, '.');
+
+      setInputedData(eval(expression).toString());
+      console.log(expression, "=", eval(expression));
+    } catch (err) {
+      console.log(err)
+    }
   }
   return (
     <View style={styles.container}>
