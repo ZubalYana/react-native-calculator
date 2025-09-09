@@ -12,12 +12,17 @@ export default function App() {
         .replace(/÷/g, '/')
         .replace(/,/g, '.');
 
-      setInputedData(eval(expression).toString());
-      console.log(expression, "=", eval(expression));
-    } catch (err) {
-      console.log(err)
+      let result = eval(expression);
+
+      result = parseFloat(result.toFixed(10));
+
+      setInputedData(result.toString());
+      console.log(expression, "=", result);
+    } catch (e) {
+      console.log("Invalid expression", e);
     }
-  }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.burgerContainer}>
