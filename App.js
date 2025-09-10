@@ -43,7 +43,6 @@ export default function App() {
       console.log("Invalid expression", e);
     }
   };
-
   const handlePercentage = (expr) => {
     expr = expr.replace(/(\d+(\.\d+)?)([+\-*/])(\d+(\.\d+)?)%/g, (match, leftNum, _, operator, rightNum) => {
       leftNum = parseFloat(leftNum);
@@ -69,8 +68,24 @@ export default function App() {
 
     return expr;
   };
+  const toggleSign = () => {
+    setInputedData((prev) => {
+      if (prev === "") return prev;
 
+      const parts = prev.split(/([+\-×÷*/])/);
+      const lastPart = parts[parts.length - 1];
 
+      if (!lastPart) return prev;
+
+      if (lastPart.startsWith('-')) {
+        parts[parts.length - 1] = lastPart.slice(1);
+      } else {
+        parts[parts.length - 1] = '-' + lastPart;
+      }
+
+      return parts.join('');
+    });
+  };
 
 
   return (
@@ -117,7 +132,10 @@ export default function App() {
           </TouchableOpacity>
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: '#5C5C5E' }}
-            onPress={() => console.log('Click')}
+            onPress={() => {
+              toggleSign()
+              console.log(inputedData)
+            }}
           >
             <View style={{ ...styles.plusMinusBtnContainer }}>
               <Text style={{ color: 'white', fontSize: 24, position: 'absolute', left: '32%', top: '22%' }}>+</Text>
