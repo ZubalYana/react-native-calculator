@@ -80,7 +80,7 @@ export default function App() {
           >
             <View style={{ ...styles.plusMinusBtnContainer }}>
               <Text style={{ color: 'white', fontSize: 24, position: 'absolute', left: '32%', top: '22%' }}>+</Text>
-              <Text style={{ color: 'white', fontSize: 38, position: 'absolute', left: '45%', top: '21%', transform: [{ rotate: '25deg' }] }}>/</Text>
+              <Text style={{ color: 'white', fontSize: 38, position: 'absolute', left: '45%', top: '21%', transform: [{ rotate: '30deg' }] }}>/</Text>
               <Text style={{ color: 'white', fontSize: 32, position: 'absolute', right: '32%', top: '35%' }}>-</Text>
             </View>
           </TouchableOpacity>
