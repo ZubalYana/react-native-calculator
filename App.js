@@ -45,7 +45,7 @@ export default function App() {
   };
 
   const handlePercentage = (expr) => {
-    return expr.replace(/(\d+(\.\d+)?)([+\-*/])(\d+(\.\d+)?)%/g, (match, leftNum, _, operator, rightNum) => {
+    expr = expr.replace(/(\d+(\.\d+)?)([+\-*/])(\d+(\.\d+)?)%/g, (match, leftNum, _, operator, rightNum) => {
       leftNum = parseFloat(leftNum);
       rightNum = parseFloat(rightNum);
 
@@ -62,7 +62,14 @@ export default function App() {
           return match;
       }
     });
+
+    expr = expr.replace(/(\d+(\.\d+)?)%/g, (match, num) => {
+      return `(${parseFloat(num)}/100)`;
+    });
+
+    return expr;
   };
+
 
 
 
@@ -141,7 +148,7 @@ export default function App() {
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: '#2B2B2D' }}
             onPress={() => {
-              setInputedData(inputedData + '7')
+              handlePress('7')
               console.log(inputedData)
             }}
           >
@@ -150,7 +157,7 @@ export default function App() {
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: '#2B2B2D' }}
             onPress={() => {
-              setInputedData(inputedData + '8')
+              handlePress('8')
               console.log(inputedData)
             }}
           >
@@ -159,7 +166,7 @@ export default function App() {
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: '#2B2B2D' }}
             onPress={() => {
-              setInputedData(inputedData + '9')
+              handlePress('9')
               console.log(inputedData)
             }}
           >
@@ -179,7 +186,7 @@ export default function App() {
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: '#2B2B2D' }}
             onPress={() => {
-              setInputedData(inputedData + '4')
+              handlePress('4')
               console.log(inputedData)
             }}
           >
@@ -188,7 +195,7 @@ export default function App() {
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: '#2B2B2D' }}
             onPress={() => {
-              setInputedData(inputedData + '5')
+              handlePress('5')
               console.log(inputedData)
             }}
           >
@@ -197,7 +204,7 @@ export default function App() {
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: '#2B2B2D' }}
             onPress={() => {
-              setInputedData(inputedData + '6')
+              handlePress('6')
               console.log(inputedData)
             }}
           >
@@ -217,7 +224,7 @@ export default function App() {
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: '#2B2B2D' }}
             onPress={() => {
-              setInputedData(inputedData + '1')
+              handlePress('1')
               console.log(inputedData)
             }}
           >
@@ -226,7 +233,7 @@ export default function App() {
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: '#2B2B2D' }}
             onPress={() => {
-              setInputedData(inputedData + '2')
+              handlePress('2')
               console.log(inputedData)
             }}
           >
@@ -235,7 +242,7 @@ export default function App() {
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: '#2B2B2D' }}
             onPress={() => {
-              setInputedData(inputedData + '3')
+              handlePress('3')
               console.log(inputedData)
             }}
           >
@@ -264,9 +271,8 @@ export default function App() {
           </TouchableOpacity>
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: '#2B2B2D' }}
-            value="0"
             onPress={() => {
-              setInputedData(inputedData + '0');
+              handlePress('0')
               console.log(inputedData);
             }}
           >
@@ -275,7 +281,7 @@ export default function App() {
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: '#2B2B2D' }}
             onPress={() => {
-              setInputedData(inputedData + ',')
+              handlePress(',')
               console.log(inputedData)
             }}
           >
