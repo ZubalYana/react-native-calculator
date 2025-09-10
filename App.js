@@ -12,9 +12,7 @@ export default function App() {
         .replace(/÷/g, '/')
         .replace(/,/g, '.');
 
-      if (expression.includes('%')) {
-        expression = handlePercentage(expression);
-      }
+      expression = handlePercentage(expression);
 
       let result = eval(expression);
       result = parseFloat(result.toFixed(10));
@@ -25,11 +23,27 @@ export default function App() {
       console.log("Invalid expression", e);
     }
   };
+
   const handlePercentage = (expr) => {
-    return expr.replace(/(\d+(\.\d+)?)%/g, (match, number) => {
-      return `(${number}/100)`;
+    return expr.replace(/(\d+(\.\d+)?)([+\-*/])(\d+(\.\d+)?)%/g, (match, leftNum, _, operator, rightNum) => {
+      leftNum = parseFloat(leftNum);
+      rightNum = parseFloat(rightNum);
+
+      switch (operator) {
+        case '+':
+          return `${leftNum}+(${leftNum}*${rightNum}/100)`;
+        case '-':
+          return `${leftNum}-(${leftNum}*${rightNum}/100)`;
+        case '*':
+          return `${leftNum}*(${rightNum}/100)`;
+        case '/':
+          return `${leftNum}/(${rightNum}/100)`;
+        default:
+          return match;
+      }
     });
   };
+
 
 
   return (
