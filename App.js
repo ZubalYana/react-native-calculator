@@ -4,7 +4,27 @@ import { useState } from 'react';
 
 export default function App() {
   const [inputedData, setInputedData] = useState('');
+  const operators = ['+', '-', '×', '÷', '*', '/'];
 
+  const handlePress = (value) => {
+    setInputedData((prev) => {
+      if (operators.includes(value)) {
+        if (operators.includes(prev.slice(-1))) {
+          return prev.slice(0, -1) + value;
+        }
+      }
+
+      if (value === '.') {
+        const parts = prev.split(/[\+\-\×\÷\*\/]/);
+        const lastNumber = parts[parts.length - 1];
+        if (lastNumber.includes('.')) {
+          return prev;
+        }
+      }
+
+      return prev + value;
+    });
+  };
   const calculate = () => {
     try {
       let expression = inputedData
@@ -101,7 +121,7 @@ export default function App() {
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: '#5C5C5E' }}
             onPress={() => {
-              setInputedData(inputedData + '%')
+              handlePress('%')
               console.log(inputedData)
             }}
           >
@@ -110,7 +130,7 @@ export default function App() {
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: '#FF9F0A' }}
             onPress={() => {
-              setInputedData(inputedData + '÷')
+              handlePress('÷')
               console.log(inputedData)
             }}
           >
@@ -148,7 +168,7 @@ export default function App() {
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: '#FF9F0A' }}
             onPress={() => {
-              setInputedData(inputedData + '×')
+              handlePress('×')
               console.log(inputedData)
             }}
           >
@@ -186,7 +206,7 @@ export default function App() {
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: 'orange' }}
             onPress={() => {
-              setInputedData(inputedData + '-')
+              handlePress('-')
               console.log(inputedData)
             }}
           >
@@ -224,7 +244,7 @@ export default function App() {
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: '#FF9F0A' }}
             onPress={() => {
-              setInputedData(inputedData + '+')
+              handlePress('+')
               console.log(inputedData)
             }}
           >
