@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { useRef, useEffect, useState } from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function App() {
   const [inputedData, setInputedData] = useState('');
@@ -116,22 +117,31 @@ export default function App() {
           <View style={styles.burgerLine}></View>
         </View>
       </View>
-      <ScrollView
-        ref={scrollRef}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={styles.inputScroll}
-        contentContainerStyle={styles.inputContainer}
-      >
-        <TextInput
-          style={[styles.input, { fontSize: setFontSize(inputedData.length) }]}
-          placeholder="0"
-          placeholderTextColor="#FDFDFD"
-          value={inputedData}
-          onChangeText={setInputedData}
-          multiline={false}
+      <View style={styles.inputWrapper}>
+        <ScrollView
+          ref={scrollRef}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.inputScroll}
+          contentContainerStyle={styles.inputContainer}
+        >
+          <TextInput
+            style={[styles.input, { fontSize: setFontSize(inputedData.length) }]}
+            placeholder="0"
+            placeholderTextColor="#FDFDFD"
+            value={inputedData}
+            onChangeText={setInputedData}
+            multiline={false}
+          />
+        </ScrollView>
+        <LinearGradient
+          colors={['rgba(0,0,0,0.5)', 'transparent']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          style={styles.leftShadow}
+          pointerEvents="none"
         />
-      </ScrollView>
+      </View>
 
       <View style={styles.buttonsRowContainer}>
         <View style={styles.buttonsRow}>
@@ -343,12 +353,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000000ff',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
     padding: 12,
   },
-  inputScroll: {
-    // backgroundColor: '#ffffffff',
+  inputWrapper: {
+    width: '100%',
+    marginBottom: 10,
+    position: 'relative',
+  },
+
+  leftShadow: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    width: 20,
   },
   inputContainer: {
     flexGrow: 1,
@@ -361,9 +381,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 82,
     color: '#FDFDFD',
-    // fontSize: 78,
     textAlign: 'right',
-    marginBottom: 55,
+    marginBottom: 50,
   },
   inputPlaceholder: {
     color: '#ffffff',
@@ -376,7 +395,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonsRowContainer: {
-    bottom: 50,
+    bottom: 55,
   },
   buttonsRow: {
     flexDirection: 'row',
