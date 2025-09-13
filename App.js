@@ -92,6 +92,13 @@ export default function App() {
       scrollRef.current.scrollToEnd({ animated: false });
     }
   }, [inputedData]);
+  const setFontSize = (length) => {
+    if (length < 10) {
+      return 78
+    } else {
+      return 64
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -117,7 +124,7 @@ export default function App() {
         contentContainerStyle={styles.inputContainer}
       >
         <TextInput
-          style={styles.input}
+          style={[styles.input, { fontSize: setFontSize(inputedData.length) }]}
           placeholder="0"
           placeholderTextColor="#FDFDFD"
           value={inputedData}
@@ -354,7 +361,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 82,
     color: '#FDFDFD',
-    fontSize: 78,
+    // fontSize: 78,
     textAlign: 'right',
     marginBottom: 55,
   },
