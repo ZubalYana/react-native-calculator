@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
-import { useState } from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { useRef, useEffect, useState } from 'react';
 
 export default function App() {
   const [inputedData, setInputedData] = useState('');
   const operators = ['+', '-', '×', '÷', '*', '/'];
+  const scrollRef = useRef(null);
 
   const handlePress = (value) => {
     setInputedData((prev) => {
@@ -86,7 +87,11 @@ export default function App() {
       return parts.join('');
     });
   };
-
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollToEnd({ animated: false });
+    }
+  }, [inputedData]);
 
   return (
     <View style={styles.container}>
@@ -104,15 +109,23 @@ export default function App() {
           <View style={styles.burgerLine}></View>
         </View>
       </View>
+      <ScrollView
+        ref={scrollRef}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.inputScroll}
+        contentContainerStyle={styles.inputContainer}
+      >
+        <TextInput
+          style={styles.input}
+          placeholder="0"
+          placeholderTextColor="#FDFDFD"
+          value={inputedData}
+          onChangeText={setInputedData}
+          multiline={false}
+        />
+      </ScrollView>
 
-      {/* add sides shadow below */}
-      <TextInput
-        style={styles.input}
-        placeholder="0"
-        placeholderTextColor="#FDFDFD"
-        value={inputedData}
-        onChangeText={setInputedData}
-      />
       <View style={styles.buttonsRowContainer}>
         <View style={styles.buttonsRow}>
           <TouchableOpacity
@@ -326,7 +339,14 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'center',
     padding: 12,
-
+  },
+  inputScroll: {
+    // backgroundColor: '#ffffffff',
+  },
+  inputContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
   },
   input: {
     borderWidth: 1,
@@ -336,8 +356,7 @@ const styles = StyleSheet.create({
     color: '#FDFDFD',
     fontSize: 78,
     textAlign: 'right',
-    marginBottom: 4,
-    marginTop: 235
+    marginBottom: 55,
   },
   inputPlaceholder: {
     color: '#ffffff',
@@ -350,9 +369,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonsRowContainer: {
-    // flexDirection: 'column',
-    // position: 'absolute',
-    // bottom: 10,
+    bottom: 50,
   },
   buttonsRow: {
     flexDirection: 'row',
